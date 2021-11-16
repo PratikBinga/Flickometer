@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Movie.css";
 
-const Movie = ({ movie }) => {
-  console.log(movie, "movie comp");
+
+const Movie = ({ movie, openPostReviewForm }) => {
+  // const [openPostReview, setOpenPostReview] = useState(false);
+
+  const openPostReviewFormHandler = () => {
+    openPostReviewForm();
+  };
+
   return (
     <div className="movieBox">
       <img
@@ -15,6 +21,13 @@ const Movie = ({ movie }) => {
       </div>
       <div className="movieOverview">
         <div>{movie.overview}</div>
+        <button
+          className="postReviewBtn"
+          type="button"
+          onClick={openPostReviewFormHandler}
+        >
+          Post Review
+        </button>
       </div>
     </div>
   );

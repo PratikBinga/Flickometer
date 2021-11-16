@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import { debounce } from "./utils";
+
 const useApi = (text) => {
   const [searchText, setSearchText] = useState(text);
   const [selectedMovieData, setSelectedMovieData] = useState([]);
@@ -17,10 +19,13 @@ const useApi = (text) => {
     }
   };
 
+  const debounceOnChange = useCallback(debounce(fetchSelectedMovie, 500), []);
+
   const onChangeSearchMovieHandler = (e) => {
     setSearchText(e.target.value);
     console.log(e.target.value);
-    fetchSelectedMovie(e.target.value);
+    debounceOnChange(e.target.value);
+    // fetchSelectedMovie(e.target.value);
   };
 
   const fetchMovies = async () => {
@@ -38,6 +43,7 @@ const useApi = (text) => {
     onChangeSearchMovieHandler,
     fetchMovies,
     movies,
+    debounceOnChange,
   };
 };
 
