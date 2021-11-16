@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Movies from "./components/Movies";
+import Searchbox from "./components/SearchBox";
+import useApi from "../src/useApi";
 
 function App() {
+  const {
+    selectedMovieData,
+    onChangeSearchMovieHandler,
+    searchText,
+    fetchMovies,
+    movies,
+  } = useApi("");
+
+  console.log(selectedMovieData, "selectedMovieData");
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="menuBarContainer">
+        <h2> Flick-O-Meter </h2>
+        <Searchbox
+          onChangeSearchMovieHandler={onChangeSearchMovieHandler}
+          selectedMovieData={selectedMovieData}
+          searchText={searchText}
+        />
+      </div>
+      <Movies fetchMovies={fetchMovies} movies={movies} />
     </div>
   );
 }
