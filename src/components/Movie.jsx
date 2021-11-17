@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Movie.css";
-
+import { Link } from "react-router-dom";
 
 const Movie = ({ movie, openPostReviewForm }) => {
-  // const [openPostReview, setOpenPostReview] = useState(false);
-
   const openPostReviewFormHandler = () => {
     openPostReviewForm();
   };
@@ -21,13 +19,18 @@ const Movie = ({ movie, openPostReviewForm }) => {
       </div>
       <div className="movieOverview">
         <div>{movie.overview}</div>
-        <button
-          className="postReviewBtn"
-          type="button"
-          onClick={openPostReviewFormHandler}
-        >
-          Post Review
-        </button>
+        <Link to="/post-review">
+          <button
+            className="postReviewBtn"
+            type="button"
+            onClick={openPostReviewFormHandler}
+          >
+            Post Review
+          </button>
+        </Link>
+        {/* <Link className="postReviewBtn" to="/post-review"> */}
+        {/* Post Review */}
+        {/* </Link> */}
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { debounce } from "./utils";
 
 const useApi = (text) => {
+  
   const [searchText, setSearchText] = useState(text);
   const [selectedMovieData, setSelectedMovieData] = useState([]);
   const [movies, setMovies] = useState([]);

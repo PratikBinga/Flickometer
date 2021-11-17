@@ -24,9 +24,11 @@ const PostReview = () => {
         comments: "",
       }}
       validationSchema={newItemSchema}
-      onSubmit={(values) => {
+      onSubmit={(values, { resetForm }) => {
         console.log(values, "formValues----");
+
         alert(JSON.stringify(values));
+        resetForm();
       }}
     >
       {(fp) => (

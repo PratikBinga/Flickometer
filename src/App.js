@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import Movies from "./components/Movies";
-import Searchbox from "./components/SearchBox";
+import Nav from "../src/components/Nav";
+import Footer from "../src/components/Footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MoviesOverviewPage from "../src/components/MoviesOverviewPage";
+import PostReview from "../src/components/PostReview";
+import Searchbox from "../src/components/SearchBox";
 import useApi from "../src/useApi";
-import Footer from "./components/Footer";
-import PostReview from "./components/PostReview";
-import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import PostReviewOverviewPage from "./components/PostReviewOverviewPage";
+
+export const searchTextContext = React.createContext();
 
 function App() {
   const {
@@ -16,60 +19,43 @@ function App() {
     fetchMovies,
     movies,
   } = useApi("");
-  const [openPostReview, setOpenPostReview] = useState(false);
-
-  const openPostReviewForm = () => {
-    setOpenPostReview(!openPostReview);
-  };
-
-  const onClickHanlderHomePage = () => {
-    window.location.href = "/";
-  };
-
-  console.log(selectedMovieData, "selectedMovieData");
-  if (openPostReview) {
-    return (
-      <div className="menuBarContainerPostReview">
-        {/* <Link to="/">
-          {" "}
-          <h2> Flick-O-Meter </h2>
-        </Link> */}
-        <h2 style={{ cursor: "pointer" }} onClick={onClickHanlderHomePage}>
-          {" "}
-          Flick-O-Meter{" "}
-        </h2>
-        <PostReview />
+  console.log(searchText, "searchText main app");
+  return (
+    <Router>
+      <div className="menuWrapper">
+        <Nav />
+        <Searchbox
+          onChangeSearchMovieHandler={onChangeSearchMovieHandler}
+          selectedMovieData={selectedMovieData}
+          searchText={searchText}
+        />
       </div>
-    );
-  } else
-    return (
-      <Router>
-        <div className="App">
-          <div className="menuBarContainer">
-            {/* <Route path="/" component={App} /> */}
-            {/* <Link to="/">
-              {" "}
-              <h2> Flick-O-Meter </h2>
-            </Link> */}
-            <h2 style={{ cursor: "pointer" }} onClick={onClickHanlderHomePage}>
-              {" "}
-              Flick-O-Meter{" "}
-            </h2>
-            <Searchbox
-              onChangeSearchMovieHandler={onChangeSearchMovieHandler}
-              selectedMovieData={selectedMovieData}
-              searchText={searchText}
-            />
-          </div>
-          <Movies
-            fetchMovies={fetchMovies}
-            movies={movies}
-            openPostReviewForm={openPostReviewForm}
+      <searchTextContext.Provider value={searchText}>
+        <Routes>
+          <Route
+            path="/"
+            exact
+            element={
+              <MoviesOverviewPage movies={movies} fetchMovies={fetchMovies} />
+            }
           />
-          <Footer />
-        </div>
-      </Router>
-    );
+          {/* <Route path="/movies" element={<MoviesOverviewPage />} /> */}
+          <Route
+            path="/post-review"
+            element={
+              <PostReviewOverviewPage
+                fetchMovies={fetchMovies}
+                movies={movies}
+                searchText={searchText}
+              />
+            }
+          />
+        </Routes>
+      </searchTextContext.Provider>
+
+      <Footer />
+    </Router>
+  );
 }
 
 export default App;
