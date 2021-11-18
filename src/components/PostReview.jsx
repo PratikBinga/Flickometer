@@ -7,7 +7,7 @@ const PostReview = () => {
   const newItemSchema = yup.object({
     title: yup.string().required(),
     rating: yup.number().required().min(1).max(10),
-    adult: yup.string().required(),
+    // adult: yup.string().required(),
     genre: yup.string().required(),
     language: yup.string().required(),
     comments: yup.string().required(),

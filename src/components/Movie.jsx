@@ -12,7 +12,7 @@ const Movie = ({ movie, openPostReviewForm }) => {
     <div className="movieBox">
       <img
         src={"https://image.tmdb.org/t/p/w500" + movie?.poster_path}
-        alt={movie.title}
+        alt={movie?.title}
       />
       <div className="movieDetails">
         <div className="movieTitle">{movie?.title}</div>
@@ -26,7 +26,7 @@ const Movie = ({ movie, openPostReviewForm }) => {
         </span> */}
       </div>
       <div className="movieOverview">
-        <div>{movie.overview}</div>
+        <div>{movie?.overview}</div>
         <Link to="/post-review">
           <button
             className="postReviewBtn"
