@@ -2,11 +2,55 @@ import React from "react";
 import "./Movie.scss";
 import { Link } from "react-router-dom";
 import "../../node_modules/font-awesome/css/font-awesome.min.css";
+import { loadScript } from "../utils";
 
 const Movie = ({ movie, openPostReviewForm }) => {
   const openPostReviewFormHandler = () => {
     openPostReviewForm();
   };
+
+  // const openBuyorRentFormHandler = () => {
+  //   // openBuyRentForm();
+  //   console.log("object");
+  // };
+
+  async function displayRazorpay() {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const data = await fetch("http://localhost:1337/razorpay", {
+      method: "POST",
+    }).then((t) => t.json());
+
+    console.log(data, "data");
+    const __DEV__ = document.domain === "localhost";
+    const options = {
+      key: __DEV__ ? "rzp_test_crVX0LmGZAdl59" : "PRODUCTION_KEY",
+      currency: data.currency,
+      amount: data.amount.toString(),
+      order_id: data.id,
+      name: "Flick-O-Meter",
+      description: "Buy or Rent movie, Enjoy!",
+      image: "http://localhost:1337/logo.svg",
+      handler: function (response) {
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature);
+      },
+      prefill: {
+        email: "test.test@gmail.com",
+        phone_number: "9899999999",
+      },
+    };
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
 
   return (
     <div className="movieBox">
@@ -36,8 +80,14 @@ const Movie = ({ movie, openPostReviewForm }) => {
             Post Review
           </button>
         </Link>
-        {/* <Link className="postReviewBtn" to="/post-review"> */}
-        {/* Post Review */}
+        {/* <Link to="/post-review"> */}
+          <button
+            className="postReviewBtn"
+            type="button"
+            onClick={displayRazorpay}
+          >
+            Buy/Rent
+          </button>
         {/* </Link> */}
       </div>
     </div>
