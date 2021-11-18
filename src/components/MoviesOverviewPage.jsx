@@ -3,7 +3,7 @@ import Movies from "../components/Movies";
 import Searchbox from "../components/SearchBox";
 // import useApi from "../useApi";
 // import PostReview from "../components/PostReview";
-import "./MoviesOverviewPage.css";
+import "./MoviesOverviewPage.scss";
 
 const MoviesOverviewPage = ({ fetchMovies, movies }) => {
   const [openPostReview, setOpenPostReview] = useState(false);

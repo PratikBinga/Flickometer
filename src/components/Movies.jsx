@@ -1,6 +1,6 @@
 import React from "react";
 import Movie from "./Movie";
-import "./Movies.css";
+import "./Movies.scss";
 
 const Movies = ({ movies, fetchMovies, openPostReviewForm }) => {
   return (

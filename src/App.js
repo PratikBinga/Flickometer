@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App.css";
+import "./App.scss";
 import Nav from "../src/components/Nav";
 import Footer from "../src/components/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";

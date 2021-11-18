@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Movies from "./Movies";
 import Searchbox from "./SearchBox";
-import "./MoviesOverviewPage.css";
+import "./MoviesOverviewPage.scss";
 import PostReview from "./PostReview";
 import MoviesOverviewPage from "./MoviesOverviewPage";
 import searchTextContext from "../App";

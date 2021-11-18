@@ -1,6 +1,7 @@
 import React from "react";
-import "./Movie.css";
+import "./Movie.scss";
 import { Link } from "react-router-dom";
+import "../../node_modules/font-awesome/css/font-awesome.min.css";
 
 const Movie = ({ movie, openPostReviewForm }) => {
   const openPostReviewFormHandler = () => {
@@ -15,7 +16,14 @@ const Movie = ({ movie, openPostReviewForm }) => {
       />
       <div className="movieDetails">
         <div className="movieTitle">{movie?.title}</div>
-        <div className="movieVote">{movie?.vote_average}</div>
+        <div className="movieVote">
+          {movie?.vote_average}
+          <i class="fa fa-star"></i>
+        </div>
+
+        {/* <span>
+          <i className="fas fa-star"></i>
+        </span> */}
       </div>
       <div className="movieOverview">
         <div>{movie.overview}</div>

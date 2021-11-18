@@ -1,5 +1,5 @@
 import React from "react";
-import "./Nav.css";
+import "./Nav.scss";
 import { Link } from "react-router-dom";
 import Searchbox from "./SearchBox";
 import useApi from "../useApi";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./SearchBox.css";
+import "./SearchBox.scss";
 
 const Searchbox = ({
   onChangeSearchMovieHandler,

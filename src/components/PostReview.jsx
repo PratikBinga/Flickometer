@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik";
 import React from "react";
 import * as yup from "yup";
-import "./PostReview.css";
+import "./PostReview.scss";
 
 const PostReview = () => {
   const newItemSchema = yup.object({
